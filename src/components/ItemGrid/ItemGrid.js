@@ -7,8 +7,6 @@ const ItemGrid = (props) => {
         itemIds.push(it);
     }
 
-    console.log(itemIds.length);
-
     let itemRows = [];
     const itemsByRow = Math.floor(window.innerWidth / 225);
     for (let i = 0; i < itemIds.length; ++i) {

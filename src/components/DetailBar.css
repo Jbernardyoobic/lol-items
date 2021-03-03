@@ -1,0 +1,18 @@
+.detail-bar-container {
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 16rem;
+}
+
+.tags-container {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.tags-container > span {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}

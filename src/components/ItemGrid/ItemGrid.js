@@ -7,15 +7,17 @@ const ItemGrid = (props) => {
         itemIds.push(it);
     }
 
+    console.log(itemIds.length);
+
     let itemRows = [];
     const itemsByRow = Math.floor(window.innerWidth / 225);
-    console.log('BJ :', itemsByRow);
     for (let i = 0; i < itemIds.length; ++i) {
         let rowIds = [];
         for (let k = 0; k < itemsByRow && i < itemIds.length; ++k) {
             rowIds.push(itemIds[i]);
             ++i;
         }
+        --i;
         itemRows.push(rowIds);
     }
 

@@ -1,4 +1,9 @@
-.outer-container {
+.item-detail-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal-container {
     display: flex;
     flex-direction: row;
 }
@@ -36,3 +41,7 @@
     font-size: 20px;
 }
 
+.recipe-container {
+    position: absolute;
+    bottom: 1rem;
+}

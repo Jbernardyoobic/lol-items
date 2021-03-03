@@ -13,7 +13,8 @@ const DetailBar = (props) => {
             </div>
             <div className='tags-container'>
                 {item.tags.map((value, index) => <span key={index}>{value}</span>)}
-                <span>{`Prix: ${item.gold.total}`}</span>
+                <span>{`Prix: ${item.gold.base}`}</span>
+                <span>{`Prix Total: ${item.gold.total}`}</span>
                 <ItemStats stats={item.stats}></ItemStats>
             </div>
         </div>

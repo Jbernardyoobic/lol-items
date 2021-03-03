@@ -1,6 +1,6 @@
-import items from '../data/item.json';
+import items from '../../data/item.json';
 import './DetailBar.css';
-import ItemStats from './ItemStats';
+import ItemStats from '../ItemStats/ItemStats';
 
 const DetailBar = (props) => {
     const item = items[props.item];

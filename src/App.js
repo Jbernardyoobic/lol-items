@@ -1,5 +1,5 @@
 import './App.css';
-import ItemGrid from './components/ItemGrid';
+import ItemGrid from './components/ItemGrid/ItemGrid';
 import items from './data/item.json';
 
 function App() {

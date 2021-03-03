@@ -1,4 +1,4 @@
-import ItemTile from './ItemTile';
+import ItemTile from '../ItemTile/ItemTile';
 import './ItemRow.css';
 
 const ItemRow = (props) => {

@@ -1,7 +1,7 @@
 import './ItemTile.css';
-import items from '../data/item.json';
+import items from '../../data/item.json';
 import Popup from 'reactjs-popup';
-import ItemDetail from './ItemDetail';
+import ItemDetail from '../ItemDetail/ItemDetail';
 
 const ItemTile = (props) => {
     const item = items[props.item];

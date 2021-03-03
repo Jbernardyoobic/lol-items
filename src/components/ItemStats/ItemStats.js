@@ -1,5 +1,5 @@
 import './ItemStats.css';
-import constants from '../data/constants.json';
+import constants from '../../data/constants.json';
 
 const ItemStats = (props) => {
     let statNames = [];

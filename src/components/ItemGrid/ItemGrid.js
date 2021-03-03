@@ -1,4 +1,4 @@
-import ItemRow from './ItemRow';
+import ItemRow from '../ItemRow/ItemRow';
 import './ItemGrid.css';
 
 const ItemGrid = (props) => {

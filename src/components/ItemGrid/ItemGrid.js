@@ -2,17 +2,12 @@ import ItemRow from '../ItemRow/ItemRow';
 import './ItemGrid.css';
 
 const ItemGrid = (props) => {
-    let itemIds = [];
-    for (let it in props.items) {
-        itemIds.push(it);
-    }
-
     let itemRows = [];
-    const itemsByRow = Math.floor(window.innerWidth / 225);
-    for (let i = 0; i < itemIds.length; ++i) {
+    const itemsByRow = Math.floor(window.innerWidth / 250);
+    for (let i = 0; i < props.itemIds.length; ++i) {
         let rowIds = [];
-        for (let k = 0; k < itemsByRow && i < itemIds.length; ++k) {
-            rowIds.push(itemIds[i]);
+        for (let k = 0; k < itemsByRow && i < props.itemIds.length; ++k) {
+            rowIds.push(props.itemIds[i]);
             ++i;
         }
         --i;

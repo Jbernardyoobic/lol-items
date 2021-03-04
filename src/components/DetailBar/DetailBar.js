@@ -11,8 +11,7 @@ const DetailBar = (props) => {
             <div className='image-container'>
                 <img className='item-image' src={path} alt='img-tile'></img>
             </div>
-            <div className='tags-container'>
-                {item.tags.map((value, index) => <span key={index}>{value}</span>)}
+            <div className='info-container'>
                 <span>{`Prix: ${item.gold.base}`}</span>
                 <span>{`Prix Total: ${item.gold.total}`}</span>
                 <ItemStats stats={item.stats}></ItemStats>

@@ -5,13 +5,13 @@
     width: 16rem;
 }
 
-.tags-container {
+.info-container {
     margin-left: 1rem;
     display: flex;
     flex-direction: column;
 }
 
-.tags-container > span {
+.info-container > span {
     font-size: 20px;
     margin-bottom: 0.5rem;
     font-weight: bold;

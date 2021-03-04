@@ -1,7 +1,7 @@
 import './App.css';
 import ItemGrid from './components/ItemGrid/ItemGrid';
 import items from './data/item.json';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import SearchBox from './components/SearchBox/SearchBox';
 import Tag from './components/Tag/Tag';
 
@@ -12,75 +12,66 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
 
   const TAGNAMES = [
-    'Boots',
-    'SpellDamage',
-    'Mana',
-    'ManaRegen',
-    'HealthRegen',
-    'Health',
-    'CriticalStrike',
-    'Armor',
-    'SpellBlock',
-    'Lane',
-    'Damage',
-    'AttackSpeed',
-    'OnHit',
-    'LifeSteal',
-    'Active',
-    'CooldownReduction',
-    'NonbootsMovement',
-    'AbilityHaste',
-    'MagicPenetration',
-    'ArmorPenetration',
-    'Aura',
-    'SpellVamp',
-    'Slow',
-    'Tenacity',
-    'Vision',
-    'GoldPer',
-    'Stealth'
+    'Boots', 'SpellDamage', 'Mana', 'ManaRegen', 'HealthRegen', 'Health',
+    'CriticalStrike', 'Armor', 'SpellBlock', 'Lane', 'Damage', 'AttackSpeed',
+    'OnHit', 'LifeSteal', 'Active', 'CooldownReduction', 'NonbootsMovement',
+    'AbilityHaste', 'MagicPenetration', 'ArmorPenetration', 'Aura',
+    'SpellVamp', 'Slow', 'Tenacity', 'Vision', 'GoldPer', 'Stealth'
   ];
-
-  // TODO : Refactor
-  useEffect(() => {
-    console.log(tags);
-    let tmpSearchIds = [];
-    let tmpTagsIds = [];
-    let searchActive = searchValue && searchValue.length > 0;
-    let tagsActive = tags && tags.length > 0;
+  
+  // Store all ids in one array
+  const initItemIds = () => {
+    let tmp = [];
     for (let id in items) {
-      if (!searchActive) {
-        tmpSearchIds.push(id);
-      } else {
-        const sv = searchValue.toLowerCase();
+      tmp.push(id);
+    }
+    return tmp;
+  }
+  const itemIds = useMemo(() => initItemIds(), []);
+
+  // Filter ids by search value
+  const textSearch = useCallback(() => {
+    if (searchValue && searchValue.length > 0) {
+      let tmpSearchIds = [];
+      for (let id in items) {
         const name = items[id].name.toLowerCase();
-        if (name?.includes(sv)) {
+        if (name?.includes(searchValue.toLowerCase())) {
           tmpSearchIds.push(id);
         }
       }
-      if (!tagsActive) {
-        tmpTagsIds.push(id);
-      } else {
+      return tmpSearchIds;
+    } else {
+      return itemIds;
+    }
+  }, [searchValue, itemIds]);
+
+  // Filter ids by tags value
+  const tagSearch = useCallback(() => {
+    if (tags && tags.length > 0) {
+      let tmpTagsIds = [];
+      for (let id in items) {
         const itemTags = items[id].tags;
-        const commonTags = itemTags.filter(tag => {
-          if (tags.includes(tag)) {
-            return tag;
-          }
-          return null;
-        });
+        const commonTags = itemTags.filter(tag => tags.includes(tag) ? tag : null);
         if (tags.length === commonTags.length && tags.every(el => commonTags.includes(el))) {
           tmpTagsIds.push(id);
         }
       }
+      return tmpTagsIds;
+    } else {
+      return itemIds;
     }
-    let finalIds = tmpSearchIds.filter(id => tmpTagsIds.indexOf(id) > -1);
-    setIds(finalIds);
-	}, [searchValue, tags]);
+  }, [tags, itemIds]);
+
+  // Filter ids by tags and search value
+  useEffect(() => {
+    const tmpSearchIds = textSearch();
+    const tmpTagsIds = tagSearch();
+    setIds(tmpSearchIds.filter(id => tmpTagsIds.indexOf(id) > -1));
+	}, [searchValue, tags, textSearch, tagSearch]);
 
   const onTagChange = (event) => {
     if (event.target.checked) {
-      let tmp = [...tags, event.target.alt];
-      setTags(tmp);
+      setTags([...tags, event.target.alt]);
     } else {
       let tmp = [...tags];
       const index = tmp.indexOf(event.target.alt);

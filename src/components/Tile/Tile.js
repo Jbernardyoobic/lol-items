@@ -1,19 +1,20 @@
-import './ItemTile.css';
+import './Tile.css';
 import items from '../../data/item.json';
+import champions from '../../data/champion.json';
 import Popup from 'reactjs-popup';
 import ItemDetail from '../ItemDetail/ItemDetail';
 
-const ItemTile = (props) => {
-    const item = items[props.item];
+const Tile = ({item, type}) => {
+    const data = type === 'items' ? items[item] : champions[item];
 
-    const path = `http://localhost:3000/items/${item.image.full}`;
+    const path = `http://localhost:3000/${type}/${data.image.full}`;
 
     return (
         <Popup
             trigger={
                 <div className='tile-container'>
                     <img className='item-image' src={path} alt='img-tile'></img>
-                    <span className='item-name'>{item.name}</span>
+                    <span className='item-name'>{data.name}</span>
                 </div>
             }
             modal
@@ -23,9 +24,9 @@ const ItemTile = (props) => {
                     <button className="close" onClick={close}>
                         &times;
                     </button>
-                    <div className="header">{item.name}</div>
+                    <div className="header">{data.name}</div>
                     <div className="content">
-                        <ItemDetail item={props.item}/>
+                        {type === 'items' && <ItemDetail item={item}/>}
                     </div>
                 </div>
             )}
@@ -33,4 +34,4 @@ const ItemTile = (props) => {
     );
 };
 
-export default ItemTile;
+export default Tile;

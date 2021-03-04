@@ -1,8 +1,8 @@
-import ItemRow from '../ItemRow/ItemRow';
-import './ItemGrid.css';
+import Row from '../Row/Row';
+import './Grid.css';
 import { useState } from 'react';
 
-const ItemGrid = (props) => {
+const Grid = ({itemIds, type}) => {
 
     const [itemsByRow, setItemsbyRow] = useState(Math.floor(window.innerWidth / 250));
 
@@ -13,10 +13,10 @@ const ItemGrid = (props) => {
     window.addEventListener('resize', updateItemsbyRow);
 
     let itemRows = [];
-    for (let i = 0; i < props.itemIds.length; ++i) {
+    for (let i = 0; i < itemIds.length; ++i) {
         let rowIds = [];
-        for (let k = 0; k < itemsByRow && i < props.itemIds.length; ++k) {
-            rowIds.push(props.itemIds[i]);
+        for (let k = 0; k < itemsByRow && i < itemIds.length; ++k) {
+            rowIds.push(itemIds[i]);
             ++i;
         }
         --i;
@@ -25,9 +25,9 @@ const ItemGrid = (props) => {
 
     return (
         <div className="grid-container">
-            {itemRows.map((row, index) => <ItemRow items={row} key={index}></ItemRow>)}
+            {itemRows.map((row, index) => <Row type={type} items={row} key={index}></Row>)}
         </div>
     );
 };
 
-export default ItemGrid;
+export default Grid;

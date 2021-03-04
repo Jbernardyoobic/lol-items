@@ -1,4 +1,4 @@
-import ItemGrid from '../ItemGrid/ItemGrid';
+import Grid from '../Grid/Grid';
 import items from '../../data/item.json';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import SearchBox from '../SearchBox/SearchBox';
@@ -91,7 +91,7 @@ const ItemPage = () => {
                     {TAGNAMES.map((name, index) => <Tag key={index} label={name} onCheckboxChange={onTagChange}></Tag>)}
                 </div>
             </div>
-            <ItemGrid itemIds={ids}/>
+            <Grid itemIds={ids} type='items'/>
         </div>
     );
 }

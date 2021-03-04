@@ -2,3 +2,24 @@ body {
   background-color: #282c34 !important;
   color: white !important;
 }
+
+.app-header {
+  margin: 1rem 2rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.app-header > .link {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.1s;
+  margin-right: 1rem;
+}
+
+.app-header > .link:hover {
+  color: hotpink;
+  font-size: 32px;
+}

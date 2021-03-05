@@ -1,6 +1,7 @@
 import championsFull from '../../data/championFull.json';
 import './ChampionDetailPage.scss';
 import { useLocation } from 'react-router-dom';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 const ChampionDetailPage = () => {
 
@@ -44,6 +45,10 @@ const ChampionDetailPage = () => {
                     <img src={`http://localhost:3000/champions/${championData.image.full}`} alt='whynot'></img>
                 </div>
                 <div className='info-container'>
+                    <ProgressBar label='Attaque' value={championData.info.attack} color='red'></ProgressBar>
+                    <ProgressBar label='Défense' value={championData.info.defense} color='green'></ProgressBar>
+                    <ProgressBar label='Magie' value={championData.info.magic} color='dodgerblue'></ProgressBar>
+                    <ProgressBar label='Difficulté' value={championData.info.difficulty} color='blueviolet'></ProgressBar>
                     {/* <ProgressBar variant='succes' now={championData.info.attack} min={0} max={10} />
                     <ProgressBar variant='info' now={championData.info.defense} min={0} max={10} />
                     <ProgressBar variant='warning' now={championData.info.magic} min={0} max={10} />

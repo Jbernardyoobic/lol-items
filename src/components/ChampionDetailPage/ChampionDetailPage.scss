@@ -4,17 +4,18 @@
     .champ-sidebar {
         display: flex;
         flex-direction: column;
+        margin: 0 2rem;
         .name-container {
-            margin: 1rem 2rem;
+            margin: 1rem 0;
     
-            span {
-                font-size: 24px;
+            .champion-name {
+                font-size: 26px;
                 font-weight: bold;
             }
         }
     
         .image-container {
-            margin: 1rem 2rem;
+            margin: 1rem 0;
         }
     }
 

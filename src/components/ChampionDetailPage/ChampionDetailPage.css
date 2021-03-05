@@ -1,0 +1,12 @@
+.champ-detail > .name-container {
+    margin: 1rem 2rem;
+}
+
+.champ-detail > .name-container > span {
+    font-size: 24px;
+    font-weight: bold;
+} 
+
+.champ-detail > .image-container {
+    margin: 1rem 2rem;
+}

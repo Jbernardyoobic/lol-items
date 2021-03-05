@@ -3,10 +3,10 @@ import items from '../../data/item.json';
 import champions from '../../data/champion.json';
 import Popup from 'reactjs-popup';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import ChampionDetailPage from '../ChampionDetailPage/ChampionDetailPage';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Tile = ({item, type}) => {
+
     const data = type === 'items' ? items[item] : champions[item];
 
     const path = `http://localhost:3000/${type}/${data.image.full}`;
@@ -46,7 +46,7 @@ const Tile = ({item, type}) => {
                         <span className='item-name'>{data.name}</span>
                     </div>
                 </Link>
-                <Route path='/champions/:id' component={ChampionDetailPage} />
+
             </>
         )
     }

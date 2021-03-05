@@ -67,7 +67,7 @@ const ItemPage = () => {
         const tmpSearchIds = textSearch();
         const tmpTagsIds = tagSearch();
         setIds(tmpSearchIds.filter(id => tmpTagsIds.indexOf(id) > -1));
-        }, [searchValue, tags, textSearch, tagSearch]);
+        }, [searchValue, textSearch, tagSearch]);
 
     const onTagChange = (event) => {
         if (event.target.checked) {

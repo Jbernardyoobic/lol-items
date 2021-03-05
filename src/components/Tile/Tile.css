@@ -19,6 +19,11 @@
 .item-name {
     text-align: center;
     margin: auto;
+    color: white;
+}
+
+.tile-link {
+    text-decoration: none;
 }
 
 .modal {

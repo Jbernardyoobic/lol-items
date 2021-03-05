@@ -1,6 +1,7 @@
 import championsFull from '../../data/championFull.json';
 import './ChampionDetailPage.css';
 import { useLocation } from 'react-router-dom';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const ChampionDetailPage = () => {
 
@@ -32,17 +33,23 @@ const ChampionDetailPage = () => {
 
     const championData = championsFull.data[championName];
 
-    const path = `http://localhost:3000/champions/${championData.image.full}.png`;
-
-    console.log(championData, path);
+    console.log(championData);
 
     return (
         <div className='champ-detail'>
-            <div className='name-container'>
-                <span className='champion-name'>{championData.name}</span>
-            </div>
-            <div className='image-container'>
-                <img src={`http://localhost:3000/champions/${championData.image.full}`} alt='whynot'></img>
+            <div className='champ-sidebar'>
+                <div className='name-container'>
+                    <span className='champion-name'>{championData.name}</span>
+                </div>
+                <div className='image-container'>
+                    <img src={`http://localhost:3000/champions/${championData.image.full}`} alt='whynot'></img>
+                </div>
+                <div className='info-container'>
+                    <ProgressBar variant='succes' now={championData.info.attack} min={0} max={10} />
+                    <ProgressBar variant='info' now={championData.info.defense} min={0} max={10} />
+                    <ProgressBar variant='warning' now={championData.info.magic} min={0} max={10} />
+                    <ProgressBar variant='danger' now={championData.info.difficulty} min={0} max={10} />
+                </div>
             </div>
         </div>
     );

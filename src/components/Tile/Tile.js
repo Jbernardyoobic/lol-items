@@ -14,12 +14,12 @@ const Tile = ({item, type}) => {
     const renderItem = () => {
         return (
             <Popup
-            trigger={
-                <div className='tile-container'>
-                    <img src={path} alt='img-tile'></img>
-                    <span className='item-name'>{data.name}</span>
-                </div>
-            }
+                trigger={
+                    <div className='tile-container'>
+                        <img src={path} alt='img-tile'></img>
+                        <span className='item-name'>{data.name}</span>
+                    </div>
+                }
             modal
             >
                 {close => (

@@ -18,7 +18,7 @@ const ItemStats = (props) => {
     });
 
     return (
-        <div className='stats-container'>
+        <div className='item-stats-container'>
             <span>{`Rendement Fixe : ${Math.round(flatGoldEffect)}`}</span>
         </div>
     );

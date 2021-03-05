@@ -3,6 +3,8 @@ import './ChampionDetailPage.scss';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Spell from '../Spell/Spell';
+import ChampionStats from '../ChampionStats/ChampionStats';
+import ChampionBuild from '../ChampionBuild/ChampionBuild';
 
 const ChampionDetailPage = () => {
 
@@ -51,6 +53,9 @@ const ChampionDetailPage = () => {
                     <ProgressBar label='Magie' value={championData.info.magic} color='dodgerblue'></ProgressBar>
                     <ProgressBar label='Difficulté' value={championData.info.difficulty} color='blueviolet'></ProgressBar>
                 </div>
+                <div className='stats-container'>
+                    <ChampionStats stats={championData.stats}></ChampionStats>
+                </div>
             </div>
             <div className='center-container'>
                 <span className='heading'>Description</span>
@@ -59,8 +64,16 @@ const ChampionDetailPage = () => {
                 </div>
                 <span className='heading'>Sorts</span>
                 <div className='spells-container'>
-                    {<Spell spell={championData.passive} isPassive={true} />}
-                    {championData.spells.map(sp => <Spell spell={sp} />)}
+                    {<Spell key={4} spell={championData.passive} isPassive={true} />}
+                    {championData.spells.map((sp, idx) => <Spell spell={sp} key={idx}/>)}
+                </div>
+                <span className='heading'>{`Jouer avec ${championData.name}`}</span>
+                <div className='tips-container'>
+                    {championData.allytips.map((tip, idx) => <span key={idx}>{`- ${tip}`}</span>)}
+                </div>
+                <span className='heading'>{`Jouer contre ${championData.name}`}</span>
+                <div className='tips-container'>
+                    {championData.enemytips.map((tip, idx) => <span key={idx}>{`- ${tip}`}</span>)}
                 </div>
             </div>
         </div>

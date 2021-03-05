@@ -2,6 +2,7 @@ import championsFull from '../../data/championFull.json';
 import './ChampionDetailPage.scss';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import Spell from '../Spell/Spell';
 
 const ChampionDetailPage = () => {
 
@@ -49,14 +50,18 @@ const ChampionDetailPage = () => {
                     <ProgressBar label='Défense' value={championData.info.defense} color='green'></ProgressBar>
                     <ProgressBar label='Magie' value={championData.info.magic} color='dodgerblue'></ProgressBar>
                     <ProgressBar label='Difficulté' value={championData.info.difficulty} color='blueviolet'></ProgressBar>
-                    {/* <ProgressBar variant='succes' now={championData.info.attack} min={0} max={10} />
-                    <ProgressBar variant='info' now={championData.info.defense} min={0} max={10} />
-                    <ProgressBar variant='warning' now={championData.info.magic} min={0} max={10} />
-                    <ProgressBar variant='danger' now={championData.info.difficulty} min={0} max={10} /> */}
                 </div>
             </div>
             <div className='center-container'>
-                <span className='champ-lore'>{championData.lore}</span>
+                <span className='heading'>Description</span>
+                <div className='lore-container'>
+                    <span className='champ-lore'>{championData.lore}</span>
+                </div>
+                <span className='heading'>Sorts</span>
+                <div className='spells-container'>
+                    {<Spell spell={championData.passive} isPassive={true} />}
+                    {championData.spells.map(sp => <Spell spell={sp} />)}
+                </div>
             </div>
         </div>
     );

@@ -4,7 +4,7 @@
     .champ-sidebar {
         display: flex;
         flex-direction: column;
-        margin: 0 2rem;
+        margin: 0 3rem 0 2rem;
         .name-container {
             margin: 1rem 0;
     
@@ -20,11 +20,31 @@
     }
 
     .center-container {
-        margin-top: 5rem;
+        margin-top: 1.25rem;
         margin-right: 2rem;
+        display: flex;
+        flex-direction: column;
+
+        .lore-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spells-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .heading {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
 
         .champ-lore {
             font-size: 20px;
+            margin-bottom: 1rem;
         }
     }
 }

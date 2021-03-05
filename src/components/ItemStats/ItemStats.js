@@ -1,4 +1,4 @@
-import './ItemStats.css';
+import './ItemStats.scss';
 import constants from '../../data/constants.json';
 
 const ItemStats = (props) => {

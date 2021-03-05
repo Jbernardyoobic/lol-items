@@ -1,7 +1,7 @@
 import items from '../../data/item.json';
 import DetailBar from '../DetailBar/DetailBar';
 import ItemRecipe from '../ItemRecipe/ItemRecipe';
-import './ItemDetail.css';
+import './ItemDetail.scss';
 
 const ItemDetail = (props) => {
     const item = items[props.item];

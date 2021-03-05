@@ -1,0 +1,25 @@
+.detail-bar-container {
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 16rem;
+    
+    .image-container {
+        margin: 1rem;
+        width: 10rem;
+        height: 10rem;
+        display: flex;
+    }
+
+    .info-container {
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        span {
+            font-size: 20px;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import './ItemRecipe.css';
+import './ItemRecipe.scss';
 
 const ItemRecipe = (props) => {
     let recipes = [];
@@ -15,32 +15,27 @@ const ItemRecipe = (props) => {
         }
     }
 
-    const renderComponents = () => {
-        return (
-            <div className='component-container'>
-                <span>Composants</span>
-                <div className='components'>
-                    {components.map((value, index) => <img className='small-image' alt='whynot' key={index} src={`http://localhost:3000/items/${value}.png`} ></img>)}
-                </div>
-            </div>
-        );
+    const renderImg = (value, index) => {
+        return <img className='small-image' alt='whynot' key={index} src={`http://localhost:3000/items/${value}.png`} ></img>
     }
 
-    const renderRecipes = () => {
+    const renderContainer = (title) => {
         return (
             <div className='component-container'>
-                <span>Recettes</span>
+                <span>{title}</span>
                 <div className='components'>
-                    {recipes.map((value, index) => <img className='small-image' alt='whynot' key={index} src={`http://localhost:3000/items/${value}.png`} ></img>)}
+                    {title === 'Recettes' ? 
+                        recipes.map((value, index) => renderImg(value, index)) :
+                        components.map((value, index) => renderImg(value, index))}
                 </div>
             </div>
         );
-    }
+    };
 
     return (
         <div className='item-recipe-container'>
-            {components.length > 0 && renderComponents()}
-            {recipes.length > 0 && renderRecipes()}
+            {components.length > 0 && renderContainer('Composants')}
+            {recipes.length > 0 && renderContainer('Recettes')}
         </div>
     )
 }

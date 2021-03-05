@@ -1,4 +1,4 @@
-import './Tile.css';
+import './Tile.scss';
 import items from '../../data/item.json';
 import champions from '../../data/champion.json';
 import Popup from 'reactjs-popup';
@@ -16,7 +16,7 @@ const Tile = ({item, type}) => {
             <Popup
             trigger={
                 <div className='tile-container'>
-                    <img className='item-image' src={path} alt='img-tile'></img>
+                    <img src={path} alt='img-tile'></img>
                     <span className='item-name'>{data.name}</span>
                 </div>
             }
@@ -42,7 +42,7 @@ const Tile = ({item, type}) => {
             <>
                 <Link className='tile-link' to={`/champions/${data.name}`}>
                     <div className='tile-container'>
-                        <img className='item-image' src={path} alt='img-tile'></img>
+                        <img src={path} alt='img-tile'></img>
                         <span className='item-name'>{data.name}</span>
                     </div>
                 </Link>

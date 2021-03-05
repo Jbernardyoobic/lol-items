@@ -1,0 +1,17 @@
+.item-page {
+    display: flex;
+    flex-direction: row;
+    
+    .item-page-header {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 2rem;
+    }
+    
+    .item-page-title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+}
+  

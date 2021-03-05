@@ -1,0 +1,32 @@
+.item-detail-container {
+    display: flex;
+    flex-direction: column;
+
+    .horizontal-container {
+        display: flex;
+        flex-direction: row;
+
+        .description-container {
+            padding-right: 2rem;
+            display: flex;
+            flex-direction: column;
+
+            .plain-description {
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            span {
+                margin-left: 1rem;
+                margin-top: 1rem;
+                font-size: 20px;
+            }
+        }
+    }
+    
+    .recipe-container {
+        position: absolute;
+        bottom: 1rem;
+    }
+}
+

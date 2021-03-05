@@ -1,5 +1,5 @@
 import Row from '../Row/Row';
-import './Grid.css';
+import './Grid.scss';
 import { useState } from 'react';
 
 const Grid = ({itemIds, type}) => {

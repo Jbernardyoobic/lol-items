@@ -1,5 +1,5 @@
 import Tile from '../Tile/Tile';
-import './Row.css';
+import './Row.scss';
 
 const Row = ({items, type}) => {
     return (

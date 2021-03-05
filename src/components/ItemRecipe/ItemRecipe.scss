@@ -1,0 +1,20 @@
+.item-recipe-container {
+    .component-container {
+        margin: 1rem;
+        display: flex;
+        flex-direction: column;
+
+        span {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .components {
+            .small-image {
+                border-radius: 0.5rem;
+                margin: 0.5rem;
+            }
+        }
+    }
+}

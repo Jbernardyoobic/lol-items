@@ -3,7 +3,7 @@ import items from '../../data/item.json';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import SearchBox from '../SearchBox/SearchBox';
 import Tag from '../Tag/Tag';
-import './ItemPage.css';
+import './ItemPage.scss';
 
 const ItemPage = () => {
     

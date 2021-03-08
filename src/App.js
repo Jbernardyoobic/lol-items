@@ -1,5 +1,4 @@
 import './App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemPage from './components/ItemPage/ItemPage';
 import ChampionPage from './components/ChampionPage/ChampionPage';
 import ChampionDetailPage from './components/ChampionDetailPage/ChampionDetailPage';
@@ -11,7 +10,6 @@ import {
 } from 'react-router-dom';
 
 function App() {
-
   return (
     <Router>
       <div className='app'>

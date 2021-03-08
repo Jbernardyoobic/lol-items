@@ -4,7 +4,10 @@ import ItemStats from '../ItemStats/ItemStats';
 
 const DetailBar = (props) => {
     const item = items[props.item];
-    const path = `http://localhost:3000/items/${item.image.full}`;
+
+    const urlPath = window.location.href.replace(window.location.pathname, '/');
+
+    const path = `${urlPath}items/${item.image.full}`;
 
     return (
         <div className='detail-bar-container'>

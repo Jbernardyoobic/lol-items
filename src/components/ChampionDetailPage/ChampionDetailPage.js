@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import Spell from '../Spell/Spell';
 import ChampionStats from '../ChampionStats/ChampionStats';
-import ChampionBuild from '../ChampionBuild/ChampionBuild';
 
 const ChampionDetailPage = () => {
 
@@ -36,7 +35,9 @@ const ChampionDetailPage = () => {
 
     const championData = championsFull.data[championName];
 
-    console.log(championData);
+    const urlPath = window.location.href.replace(window.location.pathname, '/');
+
+    const path = `${urlPath}champions/${championData.image.full}`;
 
     return (
         <div className='champ-detail'>
@@ -45,7 +46,7 @@ const ChampionDetailPage = () => {
                     <span className='champion-name'>{championData.name}</span>
                 </div>
                 <div className='image-container'>
-                    <img src={`http://localhost:3000/champions/${championData.image.full}`} alt='whynot'></img>
+                    <img src={path} alt='whynot'></img>
                 </div>
                 <div className='info-container'>
                     <ProgressBar label='Attaque' value={championData.info.attack} color='red'></ProgressBar>

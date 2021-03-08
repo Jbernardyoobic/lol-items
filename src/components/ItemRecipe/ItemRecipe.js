@@ -15,8 +15,10 @@ const ItemRecipe = (props) => {
         }
     }
 
+    const urlPath = window.location.href.replace(window.location.pathname, '/');
+
     const renderImg = (value, index) => {
-        return <img className='small-image' alt='whynot' key={index} src={`http://localhost:3000/items/${value}.png`} ></img>
+        return <img className='small-image' alt='whynot' key={index} src={`${urlPath}items/${value}.png`} ></img>
     }
 
     const renderContainer = (title) => {

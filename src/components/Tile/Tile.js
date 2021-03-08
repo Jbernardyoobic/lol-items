@@ -9,7 +9,9 @@ const Tile = ({item, type}) => {
 
     const data = type === 'items' ? items[item] : champions[item];
 
-    const path = `http://localhost:3000/${type}/${data.image.full}`;
+    const urlPath = window.location.href.replace(window.location.pathname, '/');
+
+    const path = `${urlPath}${type}/${data.image.full}`;
 
     const renderItem = () => {
         return (

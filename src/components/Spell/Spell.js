@@ -7,7 +7,7 @@ const Spell = ({ spell, isPassive = false }) => {
     return (
         <div className='spell'>
             <span>{spell.name}</span>
-            <img className='image' alt='whynot' src={`${urlPath}${isPassive ? 'passive' : 'spell'}/${spell.image.full}`} />
+            <img className='image' alt='whynot' src={`${urlPath}/img/${isPassive ? 'passive' : 'spell'}/${spell.image.full}`} />
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import champions from '../../data/champion.json';
+import champions from '../../data/fr_FR/champion.json';
 import Grid from '../Grid/Grid';
 import Tag from '../Tag/Tag';
 import SearchBox from '../SearchBox/SearchBox';
@@ -17,7 +17,7 @@ const ChampionPage = () => {
     // Store all names in one array
     const initNames = () => {
         let tmp = [];
-        for (let name in champions) {
+        for (let name in champions.data) {
             tmp.push(name);
         }
         return tmp;
@@ -28,8 +28,8 @@ const ChampionPage = () => {
     const textSearch = useCallback(() => {
         if (searchValue && searchValue.length > 0) {
             let tmpSearchIds = [];
-            for (let id in champions) {
-                const name = champions[id].name.toLowerCase();
+            for (let id in champions.data) {
+                const name = champions.data[id].name.toLowerCase();
                 if (name?.includes(searchValue.toLowerCase())) {
                     tmpSearchIds.push(id);
                 }
@@ -44,8 +44,8 @@ const ChampionPage = () => {
     const tagSearch = useCallback(() => {
         if (tags && tags.length > 0) {
         let tmpTagsIds = [];
-        for (let id in champions) {
-            const itemTags = champions[id].tags;
+        for (let id in champions.data) {
+            const itemTags = champions.data[id].tags;
             const commonTags = itemTags.filter(tag => tags.includes(tag) ? tag : null);
             if (tags.length === commonTags.length && tags.every(el => commonTags.includes(el))) {
             tmpTagsIds.push(id);
@@ -86,7 +86,7 @@ const ChampionPage = () => {
                     {TAGNAMES.map((name, index) => <Tag key={index} label={name} onCheckboxChange={onTagChange}></Tag>)}
                 </div>
             </div>
-            <Grid itemIds={names} type='champions'/>
+            <Grid itemIds={names} type='champion'/>
         </div>
     );
 };

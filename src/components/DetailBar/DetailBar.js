@@ -1,13 +1,12 @@
-import items from '../../data/item.json';
+import items from '../../data/fr_FR/item.json';
 import './DetailBar.scss';
-import ItemStats from '../ItemStats/ItemStats';
 
 const DetailBar = (props) => {
-    const item = items[props.item];
+    const item = items.data[props.item];
 
     const urlPath = window.location.href.replace(window.location.pathname, '/');
 
-    const path = `${urlPath}items/${item.image.full}`;
+    const path = `${urlPath}/img/item/${item.image.full}`;
 
     return (
         <div className='detail-bar-container'>
@@ -17,7 +16,6 @@ const DetailBar = (props) => {
             <div className='info-container'>
                 <span>{`Prix: ${item.gold.base}`}</span>
                 <span>{`Prix Total: ${item.gold.total}`}</span>
-                <ItemStats stats={item.stats}></ItemStats>
             </div>
         </div>
     );

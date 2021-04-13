@@ -1,10 +1,10 @@
-import items from '../../data/item.json';
+import items from '../../data/fr_FR/item.json';
 import DetailBar from '../DetailBar/DetailBar';
 import ItemRecipe from '../ItemRecipe/ItemRecipe';
 import './ItemDetail.scss';
 
 const ItemDetail = (props) => {
-    const item = items[props.item];
+    const item = items.data[props.item];
     
     // Every effect is separated by a <br> tag, replace them by |
     const regexbr = /<br>/ig;

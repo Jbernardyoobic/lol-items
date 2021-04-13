@@ -1,4 +1,4 @@
-import championsFull from '../../data/championFull.json';
+import championsFull from '../../data/fr_FR/championFull.json';
 import './ChampionDetailPage.scss';
 import { useLocation } from 'react-router-dom';
 import ProgressBar from '../ProgressBar/ProgressBar';
@@ -37,7 +37,7 @@ const ChampionDetailPage = () => {
 
     const urlPath = window.location.href.replace(window.location.pathname, '/');
 
-    const path = `${urlPath}champions/${championData.image.full}`;
+    const path = `${urlPath}/img/champion/${championData.image.full}`;
 
     return (
         <div className='champ-detail'>

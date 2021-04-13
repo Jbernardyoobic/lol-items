@@ -1,5 +1,5 @@
 import Grid from '../Grid/Grid';
-import items from '../../data/item.json';
+import items from '../../data/fr_FR/item.json';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import SearchBox from '../SearchBox/SearchBox';
 import Tag from '../Tag/Tag';
@@ -22,8 +22,8 @@ const ItemPage = () => {
     // Store all ids in one array
     const initItemIds = () => {
         let tmp = [];
-        for (let id in items) {
-        tmp.push(id);
+        for (let id in items.data) {
+            tmp.push(id);
         }
         return tmp;
     }
@@ -32,33 +32,33 @@ const ItemPage = () => {
     // Filter ids by search value
     const textSearch = useCallback(() => {
         if (searchValue && searchValue.length > 0) {
-        let tmpSearchIds = [];
-        for (let id in items) {
-            const name = items[id].name.toLowerCase();
-            if (name?.includes(searchValue.toLowerCase())) {
-            tmpSearchIds.push(id);
+            let tmpSearchIds = [];
+            for (let id in items.data) {
+                const name = items.data[id].name.toLowerCase();
+                if (name?.includes(searchValue.toLowerCase())) {
+                    tmpSearchIds.push(id);
+                }
             }
-        }
-        return tmpSearchIds;
+            return tmpSearchIds;
         } else {
-        return itemIds;
+            return itemIds;
         }
     }, [searchValue, itemIds]);
 
     // Filter ids by tags value
     const tagSearch = useCallback(() => {
         if (tags && tags.length > 0) {
-        let tmpTagsIds = [];
-        for (let id in items) {
-            const itemTags = items[id].tags;
-            const commonTags = itemTags.filter(tag => tags.includes(tag) ? tag : null);
-            if (tags.length === commonTags.length && tags.every(el => commonTags.includes(el))) {
-            tmpTagsIds.push(id);
+            let tmpTagsIds = [];
+            for (let id in items.data) {
+                const itemTags = items.data[id].tags;
+                const commonTags = itemTags.filter(tag => tags.includes(tag) ? tag : null);
+                if (tags.length === commonTags.length && tags.every(el => commonTags.includes(el))) {
+                    tmpTagsIds.push(id);
+                }
             }
-        }
-        return tmpTagsIds;
+            return tmpTagsIds;
         } else {
-        return itemIds;
+            return itemIds;
         }
     }, [tags, itemIds]);
 
@@ -67,18 +67,18 @@ const ItemPage = () => {
         const tmpSearchIds = textSearch();
         const tmpTagsIds = tagSearch();
         setIds(tmpSearchIds.filter(id => tmpTagsIds.indexOf(id) > -1));
-        }, [searchValue, textSearch, tagSearch]);
+    }, [searchValue, textSearch, tagSearch]);
 
     const onTagChange = (event) => {
         if (event.target.checked) {
-        setTags([...tags, event.target.alt]);
+            setTags([...tags, event.target.alt]);
         } else {
-        let tmp = [...tags];
-        const index = tmp.indexOf(event.target.alt);
-        if (index > -1) {
-            tmp.splice(index, 1);
-        }
-        setTags(tmp);
+            let tmp = [...tags];
+            const index = tmp.indexOf(event.target.alt);
+            if (index > -1) {
+                tmp.splice(index, 1);
+            }
+            setTags(tmp);
         }
     }
 
@@ -91,7 +91,7 @@ const ItemPage = () => {
                     {TAGNAMES.map((name, index) => <Tag key={index} label={name} onCheckboxChange={onTagChange}></Tag>)}
                 </div>
             </div>
-            <Grid itemIds={ids} type='items'/>
+            <Grid itemIds={ids} type='item'/>
         </div>
     );
 }

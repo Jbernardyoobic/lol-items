@@ -11,9 +11,6 @@ const Tile = ({item, type}) => {
 
     const urlPath = window.location.href.replace(window.location.pathname, '/');
 
-    console.log(urlPath, item);
-    console.log(data);
-
     const path = `${urlPath}/img/${type}/${data.image.full}`;
 
     const renderItem = () => {

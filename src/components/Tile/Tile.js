@@ -5,7 +5,7 @@ import Popup from 'reactjs-popup';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import { Link } from 'react-router-dom';
 
-const Tile = ({item, type}) => {
+const Tile = ({item, type, size = 'large', onSelect}) => {
 
     const data = type === 'item' ? items.data[item] : champions.data[item];
 
@@ -13,11 +13,11 @@ const Tile = ({item, type}) => {
 
     const path = `${urlPath}/img/${type}/${data.image.full}`;
 
-    const renderItem = () => {
+    const renderItemModal = () => {
         return (
             <Popup
                 trigger={
-                    <div className='tile-container'>
+                    <div className={`tile-container ${size}`}>
                         <img src={path} alt='img-tile'></img>
                         <span className='item-name'>{data.name}</span>
                     </div>
@@ -39,6 +39,14 @@ const Tile = ({item, type}) => {
         )
     };
 
+    const renderItem = () => {
+        return ( 
+            <div className={`tile-container ${size}`} onClick={() => onSelect(item)}>
+                <img src={path} alt='img-tile'></img>
+            </div>
+       );
+    }
+
     const renderChampion = () => {
         return (
             <>
@@ -55,7 +63,7 @@ const Tile = ({item, type}) => {
 
     return (
         <>
-            {type === 'item' ? renderItem() : renderChampion()}
+            {type === 'item' ? (size === 'small' ? renderItem() : renderItemModal() ): renderChampion()}
         </>
     );
 };

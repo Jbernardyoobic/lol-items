@@ -17,6 +17,13 @@
     }
 }
 
+.tile-container.small {
+    max-width: 4rem;
+    min-width: 4rem;
+    height: 4rem;
+    padding: unset;
+}
+
 .tile-container:hover {
     cursor: pointer;
     transform: scale(1.1);

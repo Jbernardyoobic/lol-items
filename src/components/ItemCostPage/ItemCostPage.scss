@@ -1,58 +1,80 @@
 .item-cost-page {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
 
-    .build-container {
-        margin-top: 1rem;
+    .outer-container {
         display: flex;
         flex-direction: column;
-        margin-left: 2rem;
-        margin-right: 2rem;
+
+        .build-container {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-left: 16rem;
+            margin-right: 2rem;
+
+            .item-container:hover {
+                cursor: pointer;
+                transform: scale(1.1);
+            }
+        }
+    
+        .items-container {
+            display: flex;
+    
+            .item-page-header {
+                display: flex;
+                flex-direction: column;
+                margin: 1rem 2rem;
+            }
+            
+            .item-page-title {
+                font-size: 32px;
+                font-weight: bold;
+                margin-bottom: 2rem;
+            }
+        }
+    }
+
+    .graph-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 4rem;
 
         .item-container {
-            background-color:#222831;
-            max-width: 8rem;
-            min-width: 8rem;
-            box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
-            height: 8rem;
-            margin-bottom: 1rem;
-            transition: transform 0.1s;
-            border-radius: 1rem;
-
-            img {
-                width: 8rem;
-                border-radius: inherit;
-            } 
-        }
-
-        .item-container:hover {
-            cursor: pointer;
-            transform: scale(1.1);
+            margin-right: 2rem;
         }
     }
 
-    .items-container {
+    .btn-container {
         display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2rem;
 
-        .item-page-header {
-            display: flex;
-            flex-direction: column;
-            margin: 1rem 2rem;
-        }
-        
-        .item-page-title {
-            font-size: 32px;
+        .hide-button {
+            width: 8rem;
+            height: 4rem;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 2rem;
+            margin-left: 2rem;
         }
     }
 
-    .hide-button {
-        width: 4rem;
-        height: 4rem;
-        font-size: 16px;
-        font-weight: bold;
-        margin-left: 2rem;
+    .item-container {
+        background-color:#222831;
+        max-width: 8rem;
+        min-width: 8rem;
+        box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+        height: 8rem;
+        transition: transform 0.1s;
+        border-radius: 1rem;
+        margin-right: 2rem;
+
+        img {
+            width: 8rem;
+            border-radius: inherit;
+        } 
     }
 }

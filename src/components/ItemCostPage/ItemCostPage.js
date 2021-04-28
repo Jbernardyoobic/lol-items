@@ -1,8 +1,6 @@
-import Grid from '../Grid/Grid';
 import items from '../../data/fr_FR/item.json';
-import { useState, useEffect, useMemo, useCallback, createRef } from 'react';
-import SearchBox from '../SearchBox/SearchBox';
-import Tag from '../Tag/Tag';
+import { useState,  createRef } from 'react';
+import PageTemplate from '../PageTemplate/PageTemplate';
 import './ItemCostPage.scss';
 
 const ItemCostPage = () => {
@@ -74,20 +72,17 @@ const ItemCostPage = () => {
 
     let refs = [ref1, ref2, ref3, ref4, ref5, ref6];
 
-    const itemsRef = createRef();
     const btnRef = createRef();
 
     const [buildItems, setBuildItems] = useState([0, 0, 0, 0, 0, 0]);
-    const [ids, setIds] = useState([]);
-    const [tags, setTags] = useState([]);
-    const [searchValue, setSearchValue] = useState('');
+
+    const [pageState, setPageState] = useState(false);
 
     const TAGNAMES = [
         'Boots', 'SpellDamage', 'Mana', 'ManaRegen', 'HealthRegen', 'Health',
-        'CriticalStrike', 'Armor', 'SpellBlock', 'Lane', 'Damage', 'AttackSpeed',
-        'OnHit', 'LifeSteal', 'Active', 'CooldownReduction', 'NonbootsMovement',
-        'AbilityHaste', 'MagicPenetration', 'ArmorPenetration', 'Aura',
-        'SpellVamp', 'Slow', 'Tenacity', 'Vision', 'GoldPer', 'Stealth'
+        'CriticalStrike', 'Armor', 'SpellBlock', 'Damage', 'AttackSpeed',
+        'OnHit', 'LifeSteal', 'NonbootsMovement', 'AbilityHaste', 'MagicPenetration',
+        'ArmorPenetration', 'SpellVamp', 'Slow', 'Tenacity', 'Vision', 'GoldPer'
     ];
     
     const banIds = [
@@ -104,72 +99,6 @@ const ItemCostPage = () => {
       '3850', '3851', '3801', '3802', '3211'
     ];
   
-    // Store all ids in one array
-    const initItemIds = () => {
-        let tmp = [];
-        for (let id in items.data) {
-            if (!banIds.includes(id)) {
-                tmp.push(id);
-            }
-        }
-        return tmp;
-    }
-
-    const itemIds = useMemo(() => initItemIds(), []);
-
-    // Filter ids by search value
-    const textSearch = useCallback(() => {
-        if (searchValue && searchValue.length > 0) {
-            let tmpSearchIds = [];
-            for (let id in items.data) {
-                const name = items.data[id].name.toLowerCase();
-                if (name?.includes(searchValue.toLowerCase())) {
-                    tmpSearchIds.push(id);
-                }
-            }
-            return tmpSearchIds;
-        } else {
-            return itemIds;
-        }
-    }, [searchValue, itemIds]);
-
-    // Filter ids by tags value
-    const tagSearch = useCallback(() => {
-        if (tags && tags.length > 0) {
-            let tmpTagsIds = [];
-            for (let id in items.data) {
-                const itemTags = items.data[id].tags;
-                const commonTags = itemTags.filter(tag => tags.includes(tag) ? tag : null);
-                if (tags.length === commonTags.length && tags.every(el => commonTags.includes(el))) {
-                    tmpTagsIds.push(id);
-                }
-            }
-            return tmpTagsIds;
-        } else {
-            return itemIds;
-        }
-    }, [tags, itemIds]);
-
-    // Filter ids by tags and search value
-    useEffect(() => {
-        const tmpSearchIds = textSearch();
-        const tmpTagsIds = tagSearch();
-        setIds(tmpSearchIds.filter(id => tmpTagsIds.indexOf(id) > -1));
-    }, [searchValue, textSearch, tagSearch]);
-
-    const onTagChange = (event) => {
-        if (event.target.checked) {
-            setTags([...tags, event.target.alt]);
-        } else {
-            let tmp = [...tags];
-            const index = tmp.indexOf(event.target.alt);
-            if (index > -1) {
-                tmp.splice(index, 1);
-            }
-            setTags(tmp);
-        }
-    }
-
     const onGridItemSelect = (ev) => {
       let currentRef;
       for (let i = 0; i < 6; i++) {
@@ -198,42 +127,58 @@ const ItemCostPage = () => {
     }
 
     const onButtonClick = () => {
-      if (itemsRef.current.className.includes('hidden')) {
-        itemsRef.current.className = 'items-container';
-        itemsRef.current.style.display = 'flex';
-        btnRef.current.innerHTML = 'Next';
-      } else {
-        itemsRef.current.className = 'items-container hidden';
-        itemsRef.current.style.display = 'none';
-        btnRef.current.innerHTML = 'Prev';
-      }
+      setPageState(!pageState);
     }
 
-    return (
-      <div className='item-cost-page'>
-        <div className='items-container' ref={itemsRef}>
-          <div className='item-page-header'>
-            <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-            <div className='tags-container'>
-              {TAGNAMES.map((name, index) => <Tag key={index} label={name} onCheckboxChange={onTagChange}></Tag>)}
+
+    const renderItems = () => {
+      return (
+        <div className='outer-container'>
+          <PageTemplate banIds={banIds} tagNames={TAGNAMES} gridSize='small' type='item' title='Cost' onGridItemSelect={onGridItemSelect}></PageTemplate>
+          <div className='build-container'>
+            {buildItems.map((item, index) => {
+              if (item !== 0) {
+                return (
+                  <div key={index} className='item-container full' ref={refs[index]} onClick={() => onBuildItemSelect(index)}>
+                    <img src={`${urlPath}/img/item/${items.data[item].image.full}`} alt='img-tile'></img>
+                  </div>
+                )
+              } else {
+                return <div key={index} className='item-container empty' ref={refs[index]}></div>
+              }
+            })}
+            <div className='btn-container'>
+              <button className='hide-button' ref={btnRef} onClick={() => onButtonClick()} >Next</button>
             </div>
           </div>
-          <Grid onSelect={onGridItemSelect} itemIds={ids} type='item' size='small'/>
         </div>
-        <button className='hide-button' ref={btnRef} onClick={() => onButtonClick()} >Next</button>
-        <div className='build-container'>
+      )
+    }
+
+    const renderGraph = () => {
+      return (
+        <div className='graph-container'>
+          <div className='btn-container'>
+            <button className='hide-button' ref={btnRef} onClick={() => onButtonClick()} >Prev</button>
+          </div>
           {buildItems.map((item, index) => {
             if (item !== 0) {
               return (
-                <div key={index} className='item-container full' ref={refs[index]} onClick={() => onBuildItemSelect(index)}>
+                <div key={index} className='item-container full' ref={refs[index]}>
                   <img src={`${urlPath}/img/item/${items.data[item].image.full}`} alt='img-tile'></img>
                 </div>
               )
             } else {
               return <div key={index} className='item-container empty' ref={refs[index]}></div>
             }
-          })}
-        </div>
+        })}
+      </div>
+      )
+    }
+
+    return (
+      <div className='item-cost-page'>
+        {pageState ? renderGraph() : renderItems()}
       </div>  
     );
 }

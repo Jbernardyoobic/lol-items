@@ -38,12 +38,14 @@
     }
 
     .graph-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 4rem;
-
-        .item-container {
-            margin-right: 2rem;
+        .build-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4rem;
+    
+            .item-container {
+                margin-right: 2rem;
+            }
         }
     }
 
@@ -77,4 +79,10 @@
             border-radius: inherit;
         } 
     }
+}
+
+.build-container.absolute {
+    position: absolute;
+    width: 100vw;
+    bottom: 2rem;
 }

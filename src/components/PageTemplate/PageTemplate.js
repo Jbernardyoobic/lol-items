@@ -2,7 +2,7 @@ import Grid from '../Grid/Grid';
 import items from '../../data/fr_FR/item.json';
 import champions from '../../data/fr_FR/champion.json';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import SearchBox from '../SearchBox/SearchBox';
+import InputBox from '../SearchBox/InputBox';
 import Tag from '../Tag/Tag';
 import './PageTemplate.scss';
 
@@ -15,7 +15,7 @@ const PageTemplate = ({tagNames = [], banIds = [], title, type, gridSize = 'larg
     const DATA = type === 'item' ? items.data : champions.data;
     
     // Store all ids in one array
-    const initItemIds = () => {
+    const initItemIds = useCallback(() => {
         let tmp = [];
         for (let id in DATA) {
             if (!banIds.includes(id)) {
@@ -23,9 +23,9 @@ const PageTemplate = ({tagNames = [], banIds = [], title, type, gridSize = 'larg
             }
         }
         return tmp;
-    }
+    }, [DATA, banIds]);
 
-    const itemIds = useMemo(() => initItemIds(), []);
+    const itemIds = useMemo(() => initItemIds(), [initItemIds]);
 
     // Filter ids by search value
     const textSearch = useCallback(() => {
@@ -88,7 +88,7 @@ const PageTemplate = ({tagNames = [], banIds = [], title, type, gridSize = 'larg
         <div className="item-page">
             <div className='item-page-header'>
                 <span className='item-page-title'>{title}</span>
-                <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+                <InputBox value={searchValue} setValue={setSearchValue} />
                 <div className='tags-container'>
                     {tagNames.map((name, index) => <Tag key={index} label={name} onCheckboxChange={onTagChange}></Tag>)}
                 </div>

@@ -2,66 +2,10 @@ import items from '../../data/fr_FR/item.json';
 import { useState,  createRef } from 'react';
 import PageTemplate from '../PageTemplate/PageTemplate';
 import './ItemCostPage.scss';
+import GoldGraph from '../GoldGraph/GoldGraph';
 
 const ItemCostPage = () => {
     const urlPath = window.location.href.replace(window.location.pathname, '/');
-
-    let gold = 0;
-    const percentage = 1;
-
-    const getSec = (time) => {
-      return time % 60;
-    }
-
-    const getCreep = (value, size) => {
-      for (let i = 0; i < size; i++) {
-        let r = Math.random();
-        if (r <= percentage) {
-          gold += value;
-        }
-      }
-    }
-
-    const isCannonHere = (wave, time) => {
-      if (time <= 900) {
-        return wave % 3 === 0;
-      } else if (time <= 1500) {
-        return wave % 2 === 0;
-      } else {
-        return true;
-      }
-    }
-
-    const test = () => {
-      let time = 0;
-      let wave = 0;
-      let upgradeIndex = 0;
-      const upgrades = [125, 215, 305, 395, 485, 575, 665, 755, 845, 935, 1025];
-      const casterGold = 14;
-      const meleeGold = 21;
-      let cannonGold = 57;
-      const passiveGold = 20.4;
-
-      for (; time <= 3600; time++) {
-        if (time % 10 === 0 && time > 110) {
-          gold += passiveGold;
-        }
-        if (getSec(time) === 5 || getSec(time) === 35) {
-          wave++;
-          getCreep(casterGold, 3);
-          getCreep(meleeGold, 3);
-          if (isCannonHere(wave, time)) {
-            if (upgradeIndex < upgrades.length && time >= upgrades[upgradeIndex]) {
-              cannonGold += 3;
-              upgradeIndex++;
-            }
-            getCreep(cannonGold, 1);
-          }
-        }
-      }
-    }
-
-    test();
 
     let ref1 = createRef();
     let ref2 = createRef();
@@ -101,6 +45,9 @@ const ItemCostPage = () => {
   
     const onGridItemSelect = (ev) => {
       let currentRef;
+      if (buildItems.includes(ev)) {
+        return;
+      }
       for (let i = 0; i < 6; i++) {
         if (refs[i].current.className.includes('empty')) {
           currentRef = i;
@@ -131,26 +78,39 @@ const ItemCostPage = () => {
     }
 
 
+    const renderBuild = () => {
+      return (
+        <div className={`build-container${pageState ? ' absolute' : ''}`}>
+          {pageState && 
+            <div className='btn-container'>
+              <button className='hide-button' ref={btnRef} onClick={() => onButtonClick()} >Prev</button>
+            </div>
+          }
+          {buildItems.map((item, index) => {
+            if (item !== 0) {
+              return (
+                <div key={index} className='item-container full' ref={refs[index]} onClick={() => pageState ? null : onBuildItemSelect(index)}>
+                  <img src={`${urlPath}/img/item/${items.data[item].image.full}`} alt='img-tile'></img>
+                </div>
+              )
+            } else {
+              return <div key={index} className='item-container empty' ref={refs[index]}></div>
+            }
+          })}
+          {!pageState && 
+            <div className='btn-container'>
+              <button className='hide-button' ref={btnRef} onClick={() => onButtonClick()} >Next</button>
+            </div>
+          }
+        </div>
+      );
+    }
+
     const renderItems = () => {
       return (
         <div className='outer-container'>
           <PageTemplate banIds={banIds} tagNames={TAGNAMES} gridSize='small' type='item' title='Cost' onGridItemSelect={onGridItemSelect}></PageTemplate>
-          <div className='build-container'>
-            {buildItems.map((item, index) => {
-              if (item !== 0) {
-                return (
-                  <div key={index} className='item-container full' ref={refs[index]} onClick={() => onBuildItemSelect(index)}>
-                    <img src={`${urlPath}/img/item/${items.data[item].image.full}`} alt='img-tile'></img>
-                  </div>
-                )
-              } else {
-                return <div key={index} className='item-container empty' ref={refs[index]}></div>
-              }
-            })}
-            <div className='btn-container'>
-              <button className='hide-button' ref={btnRef} onClick={() => onButtonClick()} >Next</button>
-            </div>
-          </div>
+          {renderBuild()}
         </div>
       )
     }
@@ -158,21 +118,9 @@ const ItemCostPage = () => {
     const renderGraph = () => {
       return (
         <div className='graph-container'>
-          <div className='btn-container'>
-            <button className='hide-button' ref={btnRef} onClick={() => onButtonClick()} >Prev</button>
-          </div>
-          {buildItems.map((item, index) => {
-            if (item !== 0) {
-              return (
-                <div key={index} className='item-container full' ref={refs[index]}>
-                  <img src={`${urlPath}/img/item/${items.data[item].image.full}`} alt='img-tile'></img>
-                </div>
-              )
-            } else {
-              return <div key={index} className='item-container empty' ref={refs[index]}></div>
-            }
-        })}
-      </div>
+          <GoldGraph build={buildItems}/>
+          {renderBuild()}
+        </div>
       )
     }
 
